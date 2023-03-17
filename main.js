@@ -20,6 +20,23 @@ generateGridButton.addEventListener("click", function() {
 
     const difficultyLevel = parseInt(difficultySelect.value);
 
+    //* Calcoliamo il numero di celle, righe e colonne in base al livello di difficoltà scelto
+
+    let numCells, numRows, numCols;
+    if (difficultyLevel === 1) {
+        numCells = 100;
+        numRows = 10;
+        numCols = 10;
+    } else if (difficultyLevel === 2) {
+        numCells = 81;
+        numRows = 9;
+        numCols = 9;
+    } else if (difficultyLevel === 3) {
+        numCells = 49;
+        numRows = 7;
+        numCols = 7;
+    }
+
 }
   
 
