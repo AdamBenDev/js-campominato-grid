@@ -12,7 +12,9 @@ body {
 }
 .grid {
     display: grid;
-    margin: 0 auto; /* Centra la griglia nella pagina */
+    margin: 0 auto; 
+    width: fit-content; 
+    margin-top: 40px;
 }
 .cell {
     width: 50px;
