@@ -5,38 +5,49 @@ Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed 
 
 
 
-//* Otteniamo gli elementi HTML che useremo
+const generateBtn = document.querySelector('#generate-btn');
+const grid = document.querySelector('#grid');
+const difficultySelect = document.querySelector('#difficulty-select');
 
-const generateGridButton = document.getElementById("generate-grid-button");
-const difficultySelect = document.getElementById("difficulty-select");
-const gridContainer = document.getElementById("grid-container");
+generateBtn.addEventListener('click', () => {
+    // Cancella la griglia precedente
+    grid.innerHTML = '';
 
-//* Aggiungiamo un evento click al bottone "Genera griglia"
+    // Ottieni la difficoltà scelta dall'utente
+    const difficulty = parseInt(difficultySelect.value);
 
+    let gridSize;
 
-generateGridButton.addEventListener("click", function() {
+    switch (difficulty) {
+      case 1:
+          gridSize = { rows: 10, columns: 10 };
+          break;
 
-    //* Leggiamo il livello di difficoltà scelto dall'utente
+      case 2:
+          gridSize = { rows: 9, columns: 9 };
+          break;
 
-    const difficultyLevel = parseInt(difficultySelect.value);
+      case 3:
+          gridSize = { rows: 7, columns:7 };
+          break;
 
-    //* Calcoliamo il numero di celle, righe e colonne in base al livello di difficoltà scelto
+      default:
+          gridSize = { rows :10 , columns :10};
+     }
 
-    let numCells, numRows, numCols;
-    if (difficultyLevel === 1) {
-        numCells = 100;
-        numRows = 10;
-        numCols = 10;
-    } else if (difficultyLevel === 2) {
-        numCells = 81;
-        numRows = 9;
-        numCols = 9;
-    } else if (difficultyLevel === 3) {
-        numCells = 49;
-        numRows = 7;
-        numCols = 7;
-    }
+     // Imposta il numero di colonne della griglia in base alla difficoltà scelta
+     grid.style.gridTemplateColumns = `repeat(${gridSize.columns}, auto)`;
 
-})
-  
+     for (let i = 1; i <= gridSize.rows * gridSize.columns; i++) {
+         const cell = document.createElement('div');
+         cell.classList.add('cell');
+         cell.textContent = i;
 
+         cell.addEventListener('click', (event) => {
+             event.target.classList.add('selected');
+             console.log(`Hai cliccato sulla casella ${i}`);
+         });
+
+         grid.appendChild(cell);
+     }
+});
